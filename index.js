@@ -22,7 +22,11 @@ function run() {
       core.setFailed("No pull request found.");
       return;
     }
-
+    const pullRequestOwner = context.payload.pull_request.user.login;
+    const ownerIndex = prReviewers.indexOf(pullRequestOwner)
+    if(ownerIndex > -1){
+      prReviewers.splice(ownerIndex, 1);
+    }
     const pullRequestNumber = context.payload.pull_request.number;
     const params = {
       ...context.repo,
