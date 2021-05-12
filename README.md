@@ -1,5 +1,3 @@
-# this is a fork for AveryCameronUofR/add-reviewer-gh-action
-
 # add-reviewer-gh-action
  GitHub Action to add reviewer(s) to a pull request. 
  
