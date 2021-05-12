@@ -1,3 +1,5 @@
+# this is a fork for AveryCameronUofR/add-reviewer-gh-action
+
 # add-reviewer-gh-action
  GitHub Action to add reviewer(s) to a pull request. 
  
@@ -5,8 +7,8 @@ GitHub will add CODEOWNERS as reviewers at the start of a pull request, before a
 
 ## Usage
 ```
-- name: Add Pull Request Reviewer
-      uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
+-  name: Add Automatic Pull Request Reviewers
+      uses: buzato/add-reviewer-gh-action@1.0.5
       with: 
         reviewers: "AveryCameronUofR"
         token: ${{ secrets.GITHUB_TOKEN }}
