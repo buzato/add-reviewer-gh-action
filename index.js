@@ -19,7 +19,7 @@ async function run() {
 
     const { name, owner } = context.payload.repository
     
-    console.log(owner)
+    console.log(context.payload.repository)
     return
     const { data: reviewersData } = await octokit.pulls.listReviews({
         owner: 'holding-digital',
