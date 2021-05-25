@@ -6,7 +6,7 @@ on:
 
 jobs:
     add-reviewers-ci:
-        runs-on: [self-hosted, macOS]
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 node-version: [14.x]
