@@ -478,9 +478,12 @@ async function run() {
     const octokit = github.getOctokit(token);
     const context = github.context;
 
-    const { name, owner } = context.payload.repository
+    const { full_name } = context.payload.repository
+
+    const repoName = full_name.split('/')[1]
+    const repoOwner = full_name.split('/')[0]
     
-    console.log(context.payload.repository)
+    console.log(repoOwner, repoName)
     return
     const { data: reviewersData } = await octokit.pulls.listReviews({
         owner: 'holding-digital',
