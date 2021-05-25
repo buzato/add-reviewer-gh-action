@@ -461,7 +461,6 @@ exports.issueCommand = issueCommand;
 
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
-
 /**
  * Adds reviewers to a pull request.
  *
@@ -470,14 +469,40 @@ const github = __webpack_require__(469);
  *
  * @since 1.0.0
  */
-function run() {
+async function run() {
   try {
     const reviewers = core.getInput("reviewers");
     const removeRequest = core.getInput("remove").toLowerCase() === "true";
     const prReviewers = reviewers.split(", ");
     const token = process.env["GITHUB_TOKEN"] || core.getInput("token");
-    const octokit = new github.getOctokit(token);
+    const octokit = github.getOctokit(token);
     const context = github.context;
+
+    const { full_name } = context.payload.repository
+
+    const repoName = full_name.split('/')[1]
+    const repoOwner = full_name.split('/')[0]
+    
+    console.log(repoOwner, repoName)
+    return
+    const { data: reviewersData } = await octokit.pulls.listReviews({
+        owner: 'holding-digital',
+        repo: 'livia-app',
+        pull_number: 1404,
+    });
+    
+    if(reviewersData.length){
+      for (let i = 0; i < reviewersData.length; i++) {
+        const reviewer = reviewersData[i].user;
+        const removeReviewer = prReviewers.indexOf(reviewer.login)
+        if(removeReviewer > -1){
+          prReviewers.splice(removeReviewer, 1);
+        }
+      }
+    }
+    
+
+    return
 
     if (context.payload.pull_request == null) {
       core.setFailed("No pull request found.");

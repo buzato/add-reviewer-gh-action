@@ -1,0 +1,20 @@
+name: Add reviewers
+
+on:
+    pull_request:
+        types: [opened, reopened]
+
+jobs:
+    add-reviewers-ci:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [14.x]
+        steps:
+
+            - name: Add Automatic Pull Request Reviewers
+              uses: buzato/add-reviewer-gh-action@feat/remove
+              with:
+                reviewers: "buzato"
+                token: ${{ secrets.GITHUB_TOKEN }}
+
