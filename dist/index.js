@@ -478,10 +478,10 @@ async function run() {
     const octokit = github.getOctokit(token);
     const context = github.context;
 
-    console.log(context)
-
+    const { name, owner } = context.payload.repository
+    
+    console.log(owner)
     return
-
     const { data: reviewersData } = await octokit.pulls.listReviews({
         owner: 'holding-digital',
         repo: 'livia-app',
